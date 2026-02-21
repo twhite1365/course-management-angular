@@ -1,0 +1,116 @@
+.top-menu {
+  background: #1976d2;
+  padding: 0 15px;
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* key line */
+}
+
+
+.logo {
+  max-height: 55px;
+}
+
+.logo-and-caption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+
+/* this is for the user drop-down menu */
+.dropdown {
+  position: relative;
+}
+
+.user-trigger {
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+/* Show menu on hover OR keyboard focus */
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100%);
+  min-width: 240px;
+  background: #0f1a2c;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 8px;
+  z-index: 1000;
+}
+
+.menu-item {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,0.92);
+  padding: 10px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.menu-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.10);
+  margin: 8px 0;
+}
+
+.menu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 10px;
+  border-radius: 10px;
+}
+
+.menu-row:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+.menu-row-label {
+  color: rgba(255,255,255,0.85);
+}
+
+.segmented {
+  display: inline-flex;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.segmented-btn {
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,0.85);
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.segmented-btn.is-active {
+  background: rgba(255,255,255,0.12);
+}
+
+.menu-item.danger {
+  color: #ffb4b4;
+}

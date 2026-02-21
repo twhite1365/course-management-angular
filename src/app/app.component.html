@@ -1,0 +1,19 @@
+<div class="app-layout">
+  <header class="topbar">
+    <app-header></app-header>
+  </header>
+
+  <div class="app-body">
+    <nav class="sidebar" aria-label="Primary navigation">
+      <app-sidebar></app-sidebar>
+    </nav>
+
+    <main class="app-content" id="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <app-footer appName="CourseOps" version="v0.1"></app-footer>
+  </footer>
+</div>
