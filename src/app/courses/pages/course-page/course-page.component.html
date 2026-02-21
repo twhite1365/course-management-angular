@@ -1,0 +1,15 @@
+<div class="demo">
+  <button (click)="onEditCourse()" i18n>Edit Course</button>
+</div>
+
+<div class="courses">
+  <course-card
+    *ngFor="let course of courses; let i = index"
+    (courseChanged)="save($event)"
+    type="beginner"
+    [course]="course"
+    [cardIndex]="i"
+  >
+    <course-image [src]="course.iconUrl"></course-image>
+  </course-card>
+</div>
