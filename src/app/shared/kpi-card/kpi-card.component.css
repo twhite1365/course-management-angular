@@ -1,0 +1,21 @@
+.kpi {      
+  height: 160px;
+  min-width: 200px;
+  margin: .75rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid #ebedef;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.kpi-value {
+  margin-top: 2rem;
+  margin-bottom: .25rem;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.kpi-description {
+  font-size: 1rem;
+  line-height: 1.2;
+}
