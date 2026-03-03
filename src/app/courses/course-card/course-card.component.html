@@ -1,6 +1,6 @@
 <div *ngIf="course" class="course-card" #container>
   <div class="course-title">
-    {{ (cardIndex || '') + ' ' + course.description }}
+    {{ (course.courseId || '') + ' ' + course.name }}
   </div>
 
   <ng-container *ngIf="course.iconUrl">

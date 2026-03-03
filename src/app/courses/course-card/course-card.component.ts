@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from "@angular/core";
-import { Course } from "../../model/course";
+import { Course } from "../../models/course";
 import { CoursesService } from "../courses.service";
 import { CommonModule } from "@angular/common";
 

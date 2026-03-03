@@ -1,31 +1,43 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { COURSES } from '../../../../db-data';
-import { CoursesService } from '../../../courses/courses.service';
-import { Course } from '../../../model/course';
-import { CourseCardComponent } from '../../course-card/course-card.component';
-import { CourseImageComponent } from '../../course-image/course-image.component';
+import { CommonModule } from "@angular/common";
+import { Component, signal } from "@angular/core";
+import { CoursesService } from "../../../core/services/courses.service";
+import { Course } from "../../../models/course";
+import { CourseCardComponent } from "../../course-card/course-card.component";
+import { CourseImageComponent } from "../../course-image/course-image.component";
+import { CourseDto } from "src/app/models/course.dto";
 
 @Component({
-  selector: 'course-page',
+  selector: "course-page",
   imports: [CommonModule, CourseCardComponent, CourseImageComponent],
 
-  templateUrl: './course-page.component.html',
-    styleUrls: ['./course-page.component.css'],
+  templateUrl: "./course-page.component.html",
+  styleUrls: ["./course-page.component.css"],
 })
 export class CoursePage {
-courses: Course[] = COURSES;
+  courses: CourseDto[] = [];
 
-    coursesTotal = this.courses.length;
+  coursesTotal;
 
-    constructor( private coursesService: CoursesService ) {
-    }
+  constructor(private coursesService: CoursesService) {}
 
-    onEditCourse() {
-            this.courses[1].category = 'ADVANCED';
-    }
+  ngOnInit() {
+    this.coursesService
+      .getCourses()
+      .subscribe(
+        (courses) => (
+          (this.courses = courses.items),
+          (this.coursesTotal = courses.totalCount)
+        ),
+      );
+  }
 
-    save(course: Course) {
-        this.coursesService.saveCourse(course).subscribe( () => console.log('Course Saved!') );
-    }
+  onEditCourse() {
+    // this.courses[1].category = 'ADVANCED';
+  }
+
+  // implement this in a taler commit
+
+  save(course: Course) {
+    // this.coursesService.saveCourse(course).subscribe( () => console.log('Course Saved!') );
+  }
 }
