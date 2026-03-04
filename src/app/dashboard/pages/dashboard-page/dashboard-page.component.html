@@ -1,4 +1,4 @@
-@for ( kpi of kpis; track kpi.value ){
+@for ( kpi of kpis; track kpi.description ){
     <kpi-card class="kpi-grid" [value]="kpi.value" [description]="kpi.description">        
     </kpi-card>
 }
