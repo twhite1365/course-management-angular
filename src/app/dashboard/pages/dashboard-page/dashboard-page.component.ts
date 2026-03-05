@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { DashboardService } from "src/app/core/services/dashboard.service";
 import { DashboardKpiDto } from "src/app/models/DashboardKpiDto";
 import { KpiCard } from "src/app/shared/kpi-card/kpi-card.component";
@@ -10,18 +10,16 @@ import { KpiCard } from "src/app/shared/kpi-card/kpi-card.component";
   styleUrl: "./dashboard-page.component.css",
 })
 export class DashboardPage {
-  constructor(private dashboardService: DashboardService) {}
+  private dashboardService = inject( DashboardService );
 
-  dashboardkpis!: DashboardKpiDto;
+  
   loading = true;
   error = false;
-
   kpis: { value: number; description: string }[] = [];
 
   ngOnInit() {
     this.dashboardService.GetDashboardKPIs().subscribe({
-      next: (kpis) => {
-        this.dashboardkpis = kpis;
+      next: (kpis) => {        
 
         this.kpis = [
           { value: kpis.totalStudents, description: "Total Students" },

@@ -1,5 +1,16 @@
-@for ( kpi of kpis; track kpi.description ){
-    <kpi-card class="kpi-grid" [value]="kpi.value" [description]="kpi.description">        
-    </kpi-card>
+@if (loading) {
+    <div>
+        <p>Loading dashboard...</p>
+    </div>
 }
-
+@if (error) {
+    <div>
+        <p>Failed to load dashboard data.</p>
+    </div>
+}
+@if (!loading && !error) {
+    @for ( kpi of kpis; track kpi.value ){
+        <kpi-card class="kpi-grid" [value]="kpi.value" [description]="kpi.description">        
+        </kpi-card>
+    }
+}
