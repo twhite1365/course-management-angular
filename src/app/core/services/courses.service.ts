@@ -1,5 +1,5 @@
 import { HttpParams } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { CourseDto } from "src/app/models/course.dto";
 import { PaginatedResult } from "src/app/models/paginated-result";
@@ -7,8 +7,8 @@ import { HttpService } from "./http.service";
 
 @Injectable({ providedIn: "root" })
 export class CoursesService {
-
-  constructor(private http: HttpService) {}
+  
+  private readonly http = inject( HttpService );
 
   getCourses(
     page: number = 1,
@@ -19,8 +19,8 @@ export class CoursesService {
     const url = "courses";
 
     const params = new HttpParams()
-      .set("pageNumber", page)
-      .set("pageSize", size)
+      .set("pageNumber", page.toString())
+      .set("pageSize", size.toString())
       .set("isActive", isActive.toString());
 
     return this.http.get<PaginatedResult<CourseDto>>(url, params);

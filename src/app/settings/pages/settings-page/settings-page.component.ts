@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'settings-page',
   imports: [],
   templateUrl: './settings-page.component.html',
-  styleUrl: './settings-page.component.css',
+  styleUrls: ['./settings-page.component.css'],
 })
 export class SettingsPage {
 

@@ -7,11 +7,10 @@ import { KpiCard } from "src/app/shared/kpi-card/kpi-card.component";
   selector: "dashboard-page",
   imports: [KpiCard],
   templateUrl: "./dashboard-page.component.html",
-  styleUrl: "./dashboard-page.component.css",
+  styleUrls: ["./dashboard-page.component.css"],
 })
 export class DashboardPage {
-  private dashboardService = inject( DashboardService );
-
+  private readonly dashboardService = inject( DashboardService );
   
   loading = true;
   error = false;

@@ -9,8 +9,8 @@ import { ApiService } from './api.service';
 
 export class HttpService {
 
-  private httpClient = inject(HttpClient);
-  private apiService = inject(ApiService);
+  private readonly httpClient = inject(HttpClient);
+  private readonly apiService = inject(ApiService);
 
   get<T>(endpoint: string, params?: HttpParams): Observable<T> {
     const url = this.apiService.buildUrl(endpoint);

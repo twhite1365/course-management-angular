@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment.prod";
+import { environment } from "src/environments/environment";
 
 
 @Injectable({ providedIn: 'root' })
@@ -7,7 +7,7 @@ import { environment } from "src/environments/environment.prod";
 export class ApiService {
     private apiUrl = environment.apiBaseUrl;
 
-    buildUrl( path: string): string {
-        return `${this.apiUrl}/${path}`;
-    }
+  buildUrl(path: string): string {
+    return `${this.apiUrl}/${path}`;
+  }
 }

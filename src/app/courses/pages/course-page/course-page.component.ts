@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
-import { Component, signal } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { CoursesService } from "../../../core/services/courses.service";
-import { Course } from "../../../models/course";
 import { CourseCardComponent } from "../../course-card/course-card.component";
 import { CourseImageComponent } from "../../course-image/course-image.component";
 import { CourseDto } from "src/app/models/course.dto";
@@ -15,10 +14,8 @@ import { CourseDto } from "src/app/models/course.dto";
 })
 export class CoursePage {
   courses: CourseDto[] = [];
-
   coursesTotal;
-
-  constructor(private coursesService: CoursesService) {}
+  private readonly coursesService = inject(CoursesService);
 
   ngOnInit() {
     this.coursesService
@@ -37,7 +34,7 @@ export class CoursePage {
 
   // implement this in a taler commit
 
-  save(course: Course) {
+  save(course: CourseDto) {
     // this.coursesService.saveCourse(course).subscribe( () => console.log('Course Saved!') );
   }
 }

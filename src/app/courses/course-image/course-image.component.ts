@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, input, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'course-image',
@@ -8,16 +8,6 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./course-image.component.css'],
   
 })
-export class CourseImageComponent implements OnInit {
-
-  @Input('src')
-  imageUrl:string;
-
-
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class CourseImageComponent {
+  imageUrl = input.required<string>({alias: 'src'});
 }
