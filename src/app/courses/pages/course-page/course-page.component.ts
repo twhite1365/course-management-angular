@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CoursesService } from "../../../core/services/courses.service";
 import { CourseCardComponent } from "../../course-card/course-card.component";
 import { CourseImageComponent } from "../../course-image/course-image.component";
@@ -14,18 +15,66 @@ import { CourseDto } from "src/app/models/course.dto";
 })
 export class CoursePage {
   courses: CourseDto[] = [];
-  coursesTotal;
+  coursesTotal = 0;
+  pageNumber = 1;
+  pageSize = 10;
   private readonly coursesService = inject(CoursesService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+
+  loading = true;
+  error = false;
 
   ngOnInit() {
-    this.coursesService
-      .getCourses()
-      .subscribe(
-        (courses) => (
-          (this.courses = courses.items),
-          (this.coursesTotal = courses.totalCount)
-        ),
-      );
+    this.route.queryParamMap.subscribe((params) => {
+      this.pageNumber = this.parsePositiveNumber(params.get("pageNumber"), 1);
+      this.pageSize = this.parsePositiveNumber(params.get("pageSize"), 10);
+      this.loadCourses();
+    });
+  }
+
+  private loadCourses() {
+    this.loading = true;
+    this.error = false;
+
+    this.coursesService.getCourses(this.pageNumber, this.pageSize).subscribe({
+      next: (courses) => {
+        this.courses = courses.items;
+        this.coursesTotal = courses.totalCount;
+        this.loading = false;
+      },
+      error: () => {
+        this.error = true;
+        this.loading = false;
+      },
+    });
+  }
+
+  private parsePositiveNumber(value: string | null, fallback: number): number {
+    const parsed = Number(value);
+    return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
+  }
+
+  onPageChange(pageNumber: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        pageNumber,
+        pageSize: this.pageSize,
+      },
+      queryParamsHandling: "merge",
+    });
+  }
+
+  onPageSizeChange(pageSize: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        pageNumber: 1,
+        pageSize,
+      },
+      queryParamsHandling: "merge",
+    });
   }
 
   onEditCourse() {
