@@ -24,33 +24,15 @@
           <course-image [src]="course.iconUrl"></course-image>
         </course-card>
       }
-
     </div>
 
-    <div class="pagination-controls">
-      <button (click)="onPageChange(pageNumber - 1)" [disabled]="pageNumber <= 1">
-        Previous
-      </button>
-      <span>Page {{ pageNumber }}</span>
-      <button
-        (click)="onPageChange(pageNumber + 1)"
-        [disabled]="courses.length < pageSize"
-      >
-        Next
-      </button>
-      <label>
-        Page Size
-        <select
-          [value]="pageSize"
-          (change)="onPageSizeChange(+$any($event.target).value)"
-        >
-          <option [value]="5">5</option>
-          <option [value]="10">10</option>
-          <option [value]="25">25</option>
-        </select>
-      </label>
-    </div>
+    <mat-paginator 
+      [length]="coursesTotal" 
+      [pageSize]="pageSize" 
+      [pageIndex]="pageNumber - 1" 
+      [pageSizeOptions]="[1,5, 10, 25, 100]"
+      (page)="handlePageEvent($event)"
+      aria-label="Select page">
+    </mat-paginator>
 }
-<div>
-  Total courses: {{ courses.length }}
-</div>
+

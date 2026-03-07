@@ -5,10 +5,11 @@ import { CoursesService } from "../../../core/services/courses.service";
 import { CourseCardComponent } from "../../course-card/course-card.component";
 import { CourseImageComponent } from "../../course-image/course-image.component";
 import { CourseDto } from "src/app/models/course.dto";
+import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: "course-page",
-  imports: [CommonModule, CourseCardComponent, CourseImageComponent],
+  imports: [CommonModule, CourseCardComponent, CourseImageComponent, MatPaginatorModule],
 
   templateUrl: "./course-page.component.html",
   styleUrls: ["./course-page.component.css"],
@@ -54,6 +55,18 @@ export class CoursePage {
     const parsed = Number(value);
     return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
   }
+
+  handlePageEvent(event: PageEvent) {
+  // 1. If the page size changed, call onPageSizeChange
+  if (event.pageSize !== this.pageSize) {
+    this.onPageSizeChange(event.pageSize);
+  } 
+  // 2. If the size stayed the same, but the index changed, call onPageChange
+  else {
+    // Material uses 0-based index, so we add 1 for your 1-based method
+    this.onPageChange(event.pageIndex + 1);
+  }
+}
 
   onPageChange(pageNumber: number) {
     this.router.navigate([], {
