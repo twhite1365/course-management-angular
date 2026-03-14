@@ -48,6 +48,7 @@ label {
 
 input,
 textarea {
+  box-sizing: border-box;
   width: 100%;
   border: 1px solid #cbd5e1;
   border-radius: 12px;
@@ -83,22 +84,33 @@ textarea:focus {
 
 .actions {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 16px;
 }
 
 button,
 .secondary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 48px;
   border-radius: 999px;
-  padding: 12px 18px;
+  padding: 0 18px;
   font: inherit;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
 button {
-  border: 0;
+  appearance: none;
+  margin: 0;
+  border: 1px solid transparent;
   background: #0f172a;
   color: #fff;
   cursor: pointer;
+  font-size: inherit;
 }
 
 button:disabled {
