@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { CoursesService } from "../../../core/services/courses.service";
 import { CourseCardComponent } from "../../course-card/course-card.component";
 import { CourseImageComponent } from "../../course-image/course-image.component";
@@ -9,7 +9,7 @@ import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: "course-page",
-  imports: [CommonModule, CourseCardComponent, CourseImageComponent, MatPaginatorModule],
+  imports: [CommonModule, CourseCardComponent, CourseImageComponent, MatPaginatorModule, RouterLink],
 
   templateUrl: "./course-page.component.html",
   styleUrls: ["./course-page.component.css"],

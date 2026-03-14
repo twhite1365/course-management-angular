@@ -1,6 +1,7 @@
 import { HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { CreateCourseRequest } from "src/app/models/create-course-request";
 import { CourseDto } from "src/app/models/course.dto";
 import { PaginatedResult } from "src/app/models/paginated-result";
 import { HttpService } from "./http.service";
@@ -24,5 +25,9 @@ export class CoursesService {
       .set("isActive", isActive.toString());
 
     return this.http.get<PaginatedResult<CourseDto>>(url, params);
+  }
+
+  createCourse(course: CreateCourseRequest): Observable<CourseDto> {
+    return this.http.post<CourseDto>("courses", course);
   }
 }

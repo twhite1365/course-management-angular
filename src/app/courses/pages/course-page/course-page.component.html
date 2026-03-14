@@ -10,7 +10,10 @@
 }
 @if (!loading && !error) {
     <div class="demo">
-      <button (click)="onEditCourse()" i18n>Edit Course</button>
+      <div class="actions">
+        <button (click)="onEditCourse()" i18n>Edit Course</button>
+        <a routerLink="/courses/new" class="create-link">Create Course</a>
+      </div>
     </div>
 
     <div class="courses">

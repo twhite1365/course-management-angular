@@ -1,3 +1,25 @@
+.demo {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.create-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #0f172a;
+    color: #fff;
+    text-decoration: none;
+}
+
 .courses {
     max-width: 400px;
     margin: 50px auto;

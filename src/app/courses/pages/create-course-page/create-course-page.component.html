@@ -1,0 +1,72 @@
+<section class="create-course-page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Courses</p>
+      <h1>Create course</h1>
+      <p class="subcopy">Add a course with reactive forms and post it to the API.</p>
+    </div>
+    <a routerLink="/courses" class="secondary-link">Back to list</a>
+  </div>
+
+  <form class="course-form" [formGroup]="form" (ngSubmit)="submit()">
+    <label>
+      <span>Course name</span>
+      <input type="text" formControlName="name" placeholder="Angular Fundamentals" />
+      @if (shouldShowError("name") && form.controls.name.hasError("required")) {
+        <small class="error-text">Course name is required.</small>
+      }
+      @if (shouldShowError("name") && form.controls.name.hasError("minlength")) {
+        <small class="error-text">Course name must be at least 3 characters.</small>
+      }
+    </label>
+
+    <div class="date-grid">
+      <label>
+        <span>Start date</span>
+        <input type="date" formControlName="startDate" />
+        @if (shouldShowError("startDate")) {
+          <small class="error-text">Start date is required.</small>
+        }
+      </label>
+
+      <label>
+        <span>End date</span>
+        <input type="date" formControlName="endDate" />
+        @if (shouldShowError("endDate")) {
+          <small class="error-text">End date is required.</small>
+        }
+      </label>
+    </div>
+
+    @if (hasFormError("invalidDateRange")) {
+      <small class="error-text">End date must be on or after the start date.</small>
+    }
+
+    <label>
+      <span>Description</span>
+      <textarea rows="5" formControlName="description" placeholder="What will learners get from this course?"></textarea>
+      @if (shouldShowError("description") && form.controls.description.hasError("maxlength")) {
+        <small class="error-text">Description must be 500 characters or fewer.</small>
+      }
+    </label>
+
+    <label>
+      <span>Icon URL</span>
+      <input type="url" formControlName="iconUrl" placeholder="https://example.com/course-icon.png" />
+      @if (shouldShowError("iconUrl") && form.controls.iconUrl.hasError("maxlength")) {
+        <small class="error-text">Icon URL must be 2048 characters or fewer.</small>
+      }
+    </label>
+
+    @if (submitError) {
+      <div class="submit-error">{{ submitError }}</div>
+    }
+
+    <div class="actions">
+      <button type="submit" [disabled]="form.invalid || submitting">
+        {{ submitting ? "Creating..." : "Create course" }}
+      </button>
+      <a routerLink="/courses" class="secondary-link">Cancel</a>
+    </div>
+  </form>
+</section>
