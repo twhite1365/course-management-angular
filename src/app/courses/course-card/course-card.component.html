@@ -1,30 +1,31 @@
 <div class="course-card" #container>
-  <div class="course-title">
-    {{ (course().courseId || "") + " " + course().name }}
+  <div class="card-header">
+    <div class="course-kicker">Course {{ course().courseId }}</div>
+    <div class="course-title">
+      {{ course().name }}
+    </div>
   </div>
 
   @if (course().iconUrl) {
-    <ng-content select="course-image"></ng-content>
+    <div class="course-media">
+      <ng-content select="course-image"></ng-content>
+    </div>
   }
 
-  <div class="course-description">
-    Edit Title:
+  <div class="course-editor">
+    <label class="editor-label" for="course-description-{{ course().courseId }}">Edit Title</label>
     <input
+      id="course-description-{{ course().courseId }}"
       #courseTitle
       [value]="draftDescription"
       (input)="onTitleChanged(courseTitle.value)"
     >
   </div>
 
-  <!-- <div class="course-category">
-    <div class="category" i18n>
-      {course().category, select, BEGINNER {Beginner} INTERMEDIATE {Intermediate} ADVANCED {Advanced}}
-    </div>
-  </div> -->
-
-  <button (click)="onSaveClicked()">Save Course</button>
+  <div class="card-actions">
+    <button (click)="onSaveClicked()">Save Course</button>
+  </div>
 </div>
-
 
 
 

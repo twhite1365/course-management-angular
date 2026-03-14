@@ -1,20 +1,35 @@
 @if (loading) {
-    <div>
-        <p>Loading dashboard...</p>
-    </div>
+    <section class="courses-shell">
+      <div class="state-message">
+        <p>Loading courses...</p>
+      </div>
+    </section>
 }
 @if (error) {
-    <div>
-        <p>Failed to load dashboard data.</p>
-    </div>
+    <section class="courses-shell">
+      <div class="state-message error">
+        <p>Failed to load course data.</p>
+      </div>
+    </section>
 }
 @if (!loading && !error) {
-    <div class="demo">
-      <div class="actions">
-        <button (click)="onEditCourse()" i18n>Edit Course</button>
-        <a routerLink="/courses/new" class="create-link">Create Course</a>
+    <section class="courses-shell">
+      <header class="page-header">
+        <div class="page-copy">
+          <p class="eyebrow">Courses</p>
+          <h1>Course Catalog</h1>
+          <p class="page-description">Review the current catalog, edit individual cards inline, or create a new course.</p>
+        </div>
+
+        <div class="page-actions">
+          <a routerLink="/courses/new" class="create-link">Create Course</a>
+        </div>
+      </header>
+
+      <div class="courses-summary">
+        <span>{{ coursesTotal }} course{{ coursesTotal === 1 ? '' : 's' }}</span>
+        <span>Page {{ pageNumber }}</span>
       </div>
-    </div>
 
     <div class="courses">
       @for (course of courses; track course.courseId; let i = $index) {
@@ -29,13 +44,16 @@
       }
     </div>
 
-    <mat-paginator 
-      [length]="coursesTotal" 
-      [pageSize]="pageSize" 
-      [pageIndex]="pageNumber - 1" 
-      [pageSizeOptions]="[1,5, 10, 25, 100]"
-      (page)="handlePageEvent($event)"
-      aria-label="Select page">
-    </mat-paginator>
+      <div class="paginator-wrap">
+        <mat-paginator 
+          [length]="coursesTotal" 
+          [pageSize]="pageSize" 
+          [pageIndex]="pageNumber - 1" 
+          [pageSizeOptions]="[1,5, 10, 25, 100]"
+          (page)="handlePageEvent($event)"
+          aria-label="Select page">
+        </mat-paginator>
+      </div>
+    </section>
 }
 
